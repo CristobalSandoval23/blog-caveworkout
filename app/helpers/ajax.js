@@ -1,12 +1,12 @@
-export function ajax(props){
+export async function ajax(props){
     let {url, cbSuccess} = props;
-    fetch(url)
+    await fetch(url)
         .then(resp => resp.ok ? resp.json() : Promise.reject(resp))
         .then(json => cbSuccess(json))
         .catch(err => {
             let message = err.statusText || "Ocurrio un error al acceder a la API";
 
-            document.getElementById('root').innerHTML = `
+            document.getElementById('main').innerHTML = `
             <div class="error">
                 <p>Error ${err.status}: ${message}</p>
             </div>
