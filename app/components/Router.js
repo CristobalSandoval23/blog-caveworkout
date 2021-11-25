@@ -2,6 +2,8 @@ import api from "../helpers/wp_api.js";
 import { PostCard } from "./PostCard.js";
 import { ajax } from "../helpers/ajax.js";
 import { Post } from "./Post.js";
+import { SearchCard } from "./SearchCard.js";
+import { ContactForm } from "./ContactForm.js";
 
 export async function Router(){
     const d = document,
@@ -10,7 +12,6 @@ export async function Router(){
 
         let {hash} = location;
 
-        console.log(hash)
         $main.innerHTML = null;
 
         if(!hash || hash === "#/"){
@@ -18,22 +19,45 @@ export async function Router(){
                 url: api.POSTS,
                 cbSuccess:(posts)=>{
                     let html ="";
-                    console.log(posts)
                     posts.forEach(post => html += PostCard(post));
                     $main.innerHTML = html;
                 }
             })
         } else if(hash.includes("#/search")){
-            $main.innerHTML = `<h2>Sección del Buscador</h2>`
+
+            let query = localStorage.getItem("wpSearch")
+
+            if(!query){
+                d.querySelector(".loader").style.display = "none";
+                return false;
+            }
+            await ajax({
+                url: `${api.SEARCH}${query}`,
+                cbSuccess:(search)=>{
+                    let html = "";
+                    if(search.length === 0){
+                        html = `
+                        <p class="error"> 
+                        No exsten resultados de búsqueda para el término
+                            <mark>${query}</mark>
+                        </p>
+                        `;
+
+                    }else{
+                        search.forEach((post)=> (html += SearchCard(post)))
+                    }
+                    $main.innerHTML = html;
+                }
+            })
         } else if(hash.includes("#/contacto")){
-            $main.innerHTML = `<h2>Sección del Contacto</h2>`
+            $main.appendChild(ContactForm());
+
         } else{
             Post
             $main.innerHTML = `<h2>Aqui cargará el contenido de el post previamente seleccionado </h2>`
             await ajax({
                 url: `${api.POST}/${localStorage.getItem("wpPostId")}`,
                 cbSuccess:(post)=>{
-                    console.log(post)
                     $main.innerHTML = Post(post);
                 }
             })
