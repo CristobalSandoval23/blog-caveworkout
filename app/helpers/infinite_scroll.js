@@ -11,11 +11,12 @@ export  function InfiniteScroll(){
         apiURL,
         Component;
 
+        if(!location.hash.includes("#/contacto")) return false;
+
         d.addEventListener("scroll", async (e)=> {
             let {scrollTop, clientHeight, scrollHeight} = d.documentElement,
                 {hash} = w.location;
 
-                console.log(scrollTop + clientHeight + 50,  scrollHeight)
             if(scrollTop + clientHeight + 100 >=  scrollHeight){
 
                 api.page ++;
