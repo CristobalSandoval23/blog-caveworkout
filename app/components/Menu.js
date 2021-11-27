@@ -8,6 +8,8 @@ export function Menu(){
         <a href="#/search">Busqueda</a>
         <span>-</span>
         <a href="#/contacto">Contacto</a>
+        <span>-</span>
+        <a href="#/login">Login</a>
         
     `;
        return $menu;

@@ -4,6 +4,8 @@ import { ajax } from "../helpers/ajax.js";
 import { Post } from "./Post.js";
 import { SearchCard } from "./SearchCard.js";
 import { ContactForm } from "./ContactForm.js";
+import { Login } from "./LoginForm.js";
+import { LoginPost } from "./LoginPost.js";
 
 export async function Router(){
     const d = document,
@@ -51,8 +53,36 @@ export async function Router(){
             })
         } else if(hash.includes("#/contacto")){
             $main.appendChild(ContactForm());
+            
+        } else if(hash.includes("#/login")){
+            
+            $main.appendChild(Login());
+        } else if(hash.includes("#/usuario")){
+              
+             await fetch("https://mi-primer-restserver.herokuapp.com/api/productos?limite=5",
+             {method: "GET",
+             headers: {
+                 "Content-type": "application/json; charset=utf-8",
+                },
+            })
+            .then(res => res.ok ? res.json() : Promise.reject(res))
+            .then((posts) =>{
 
-        } else{
+                console.log(posts["data"])
+                let html = "";
+                posts["data"].forEach(post => html += LoginPost(post));
+                $main.innerHTML = html;
+            })
+            .catch(err => {
+                
+                console.log(err);
+                 let message = err.statusText || "Ocurrio un error al enviar, intenta nuevamente.";
+                 $main.innerHTML = `
+                 <p>Error ${err.status}: ${message}</p>
+                 `;
+             })
+            
+        }else{
             Post
             $main.innerHTML = `<h2>Aqui cargará el contenido de el post previamente seleccionado </h2>`
             await ajax({
