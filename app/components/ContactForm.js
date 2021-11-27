@@ -107,15 +107,12 @@ export function ContactForm(){
         </div>
         `;
 
-
         function validationsForm(){
             const $form = d.querySelector(".contact-form"),
                   $inputs = d.querySelectorAll(".contact-form [required]");
-                  console.log($inputs, "hola")
                     
                   $inputs.forEach((input) => {
 
-                    console.log("hola")
                     const $span = d.createElement("span");
                     $span.id = input.name;
                     $span.textContent = input.title;
@@ -130,7 +127,6 @@ export function ContactForm(){
                     if(pattern && $input.value !==""){
 
                         let regex = new RegExp(pattern);
-                        console.log()
                         return !regex.exec($input.value)
                         ? d.getElementById($input.name).classList.add("is-active")
                         : d.getElementById($input.name).classList.remove("is-active")
@@ -141,9 +137,7 @@ export function ContactForm(){
                             ? d.getElementById($input.name).classList.add("is-active")
                             : d.getElementById($input.name).classList.remove("is-active");
                     }
-
                 }
-
             })
 
             d.addEventListener("submit", (e)=>{
@@ -153,7 +147,7 @@ export function ContactForm(){
 
                       $loader.classList.remove("none");
 
-                      fetch("https//formsubmit.co/ajax/crisss123xd@gmail.com",
+                      fetch("https://formsubmit.co/ajax/crisss123xd@gmail.com",
                             {method: "POST",
                             body: new FormData(e.target)})
                             .then(res => res.ok ? res.json() : Promise.reject(res))
