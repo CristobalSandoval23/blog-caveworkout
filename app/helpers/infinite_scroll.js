@@ -10,15 +10,13 @@ export  function InfiniteScroll(){
     let query = localStorage.getItem("wpSearch"),
         apiURL,
         Component;
-
-        if(!location.hash.includes("#/contacto")) return false;
-
+        
         d.addEventListener("scroll", async (e)=> {
+        
             let {scrollTop, clientHeight, scrollHeight} = d.documentElement,
                 {hash} = w.location;
-
+           
             if(scrollTop + clientHeight + 100 >=  scrollHeight){
-
                 api.page ++;
                 
                 if(!hash || hash === "#/"){
@@ -27,7 +25,14 @@ export  function InfiniteScroll(){
                 } else if(hash.includes("#/search")){
                     apiURL = `${api.SEARCH}${query}&page=${api.page}`
                     Component = SearchCard;
-                }else{
+                }else if(hash.includes("#/contacto")){
+                    console.log("Contacto")
+                    return;
+                }else if(hash.includes("#/usuario")){
+                    console.log("Usuario")
+                    return;
+                }
+                else{
                     return false;
                 }
                 
@@ -36,6 +41,7 @@ export  function InfiniteScroll(){
                     cbSuccess: (posts)=>{
                         let html = "";
                         posts.forEach(post => html += Component(post));
+                        if(location.hash.includes("#/contacto") || location.hash.includes("#/login")) return false;                        
                         d.getElementById("main").insertAdjacentHTML("beforeend", html);
                         d.querySelector(".loader").style.display = "block";
                     }

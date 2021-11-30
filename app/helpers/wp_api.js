@@ -9,6 +9,7 @@ const   NAME = "css-tricks",
         SEARCH = `${API_WP}/search?_embed&search=`;
 
     let page = 1;
+
 export default {
     NAME,
     DOMAIN,

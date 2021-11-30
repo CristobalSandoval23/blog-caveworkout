@@ -1,94 +1,11 @@
+import { ajax } from "../helpers/ajax.js";
+
 export function ContactForm(){
     const d = document,
-        $form = d.createElement("form"),
-        $styles = d.getElementById("dynamic-styles");
+        $form = d.createElement("form");
 
         $form.classList.add("contact-form");
 
-        $styles.innerHTML = `
-        .contact-form {
-            --form-ok-color: #4caf50;
-            --form-error-color: #f44336;
-            margin-left: auto;
-            margin-right: auto;
-            width: 80%;
-          }
-      
-          .contact-form>* {
-            padding: 0.5rem;
-            margin: 1rem auto;
-            display: block;
-            width: 100%;
-          }
-      
-          .contact-form textarea {
-            resize: none;
-          }
-      
-          .contact-form legend,
-          .contact-form-response {
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-align: center;
-          }
-      
-          .contact-form input,
-          .contact-form textarea {
-            font-size: 1rem;
-            font-family: sans-serif;
-          }
-      
-          .contact-form input[type="submit"] {
-            width: 50%;
-            font-weight: bold;
-            cursor: pointer;
-          }
-      
-          .contact-form *::placeholder {
-            color: #000;
-          }
-      
-          .contact-form [required]:valid {
-            border: thin solid var(--form-ok-color);
-          }
-      
-          .contact-form [required]:invalid {
-            border: thin solid var(--form-error-color);
-          }
-      
-          .contact-form-error {
-            margin-top: -1rem;
-            font-size: 80%;
-            background-color: var(--form-error-color);
-            color: #fff;
-            transition: all 800ms ease;
-          }
-      
-          .contact-form-error.is-active {
-            display: block;
-            animation: show-message 1s 1 normal 0s ease-out both;
-          }
-      
-          .contact-form-loader {
-            text-align: center;
-          }
-      
-          .none {
-            display: none;
-          }
-      
-          @keyframes show-message {
-            0% {
-              visibility: hidden;
-              opacity: 0;
-            }
-      
-            100% {
-              visibility: visible;
-              opacity: 1;
-            }
-          }
-        `;
         $form.innerHTML = `
         <legend>Envíanos tus comentarios</legend>
         <input type="text" name="name" placeholder="Escribe tu nombre"
@@ -144,36 +61,29 @@ export function ContactForm(){
                 e.preventDefault();
                 const $loader = d.querySelector(".contact-form-loader"),
                       $response = d.querySelector(".contact-form-response");
-
+                     
                       $loader.classList.remove("none");
 
-                      fetch("https://formsubmit.co/ajax/crisss123xd@gmail.com",
-                            {method: "POST",
-                            body: new FormData(e.target)})
-                            .then(res => res.ok ? res.json() : Promise.reject(res))
-                            .then(json =>{
+                      let url = "https://formsubmit.co/ajax/crisss123xd@gmail.com",
+                          method = "POST",
+                          body = new FormData(e.target);
+                      ajax({url,
+                            method,
+                            body,
+                            cbSuccess:(json) =>{
                                 console.log(json);
                                 $loader.classList.add("none");
                                 $response.classList.remove("none");
                                 $response.innerHTML = `<p>${json.message}</p>`
                                 $form.reset();
-                            })
-                            .catch(err => {
-                                console.log(err)
-                                
-                                let message = err.statusText || "Ocurrio un error al enviar, intenta nuevamente.";
-                                $response.innerHTML = `
-                                <p>Error ${err.status}: ${message}</p>
-                                `;
-                            })
-                            .finally(()=> setTimeout(() =>{
-                                
+                            }
+                          })
+                            .finally(()=> setTimeout(() =>{      
                                 $response.classList.add("none");
                                 $response.innerHTML = "";
                             },3000));
             })
         }
-
 
         setTimeout(()=>validationsForm(), 100)
         return $form;

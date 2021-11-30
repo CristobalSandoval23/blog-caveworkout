@@ -1,7 +1,7 @@
 html {
     box-sizing: border-box;
     font-family: sans-serif;
-    font-size: 16px;
+    font-size: 16px; 
 }
 
 *, 
@@ -9,6 +9,34 @@ html {
 *::before{
     box-sizing: inherit;
 }
+
+#root {
+  display: grid; 
+    grid-template-columns: repeat(3,auto);
+    grid-template-rows: repeat(6, auto);
+    grid-template-areas: 
+        "Header Header Header "
+        "Main   Main   Main   "
+        "Main   Main   Main   "
+        "Main   Main   Main   "
+        "Loader   Loader   Loader   "
+        "Footer Footer Footer "
+    ;
+}
+
+header{
+  grid-area: Header;
+}
+main{
+  grid-area: Main;
+}
+.loader{
+  grid-area: Loader;
+}
+footer{
+  grid-area: Footer;
+}
+
 
 body {
     margin: 0;
@@ -136,5 +164,217 @@ img{
 .post-page video{
     margin: auto;
     display: block;
-    max-width: 100%;
+    max-width: 70%;
+}
+
+/* LOGIN FORM*/
+
+.login-form {
+    --form-ok-color: #4caf50;
+    --form-error-color: #f44336;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    height: 80%;
+
+  }
+
+  .login-form>* {
+    padding: 0.5rem;
+    margin: 1rem auto;
+    display: block;
+    width: 100%;
+  }
+
+  .login-form textarea {
+    resize: none;
+  }
+
+  .login-form legend,
+  .login-form-response {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .login-form input,
+  .login-form textarea {
+    font-size: 1rem;
+    font-family: sans-serif;
+  }
+
+  .login-form input[type="submit"] {
+    width: 50%;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .login-form *::placeholder {
+    color: #000;
+  }
+
+  .login-form [required]:valid {
+    border: thin solid var(--form-ok-color);
+  }
+
+  .login-form [required]:invalid {
+    border: thin solid var(--form-error-color);
+  }
+
+  .login-form-error {
+    margin-top: -1rem;
+    font-size: 80%;
+    background-color: var(--form-error-color);
+    color: #fff;
+    transition: all 800ms ease;
+  }
+
+  .login-form-error.is-active {
+    display: block;
+    animation: show-message 1s 1 normal 0s ease-out both;
+  }
+
+  .login-form-loader {
+    text-align: center;
+  }
+
+  .none {
+    display: none;
+  }
+
+  @keyframes show-message {
+    0% {
+      visibility: hidden;
+      opacity: 0;
+    }
+
+    100% {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  /* CONTACT FORM*/
+
+  .contact-form {
+    --form-ok-color: #4caf50;
+    --form-error-color: #f44336;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+  }
+
+  .contact-form>* {
+    padding: 0.5rem;
+    margin: 1rem auto;
+    display: block;
+    width: 100%;
+  }
+
+  .contact-form textarea {
+    resize: none;
+  }
+
+  .contact-form legend,
+  .contact-form-response {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    font-size: 1rem;
+    font-family: sans-serif;
+  }
+
+  .contact-form input[type="submit"] {
+    width: 50%;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .contact-form *::placeholder {
+    color: #000;
+  }
+
+  .contact-form [required]:valid {
+    border: thin solid var(--form-ok-color);
+  }
+
+  .contact-form [required]:invalid {
+    border: thin solid var(--form-error-color);
+  }
+
+  .contact-form-error {
+    margin-top: -1rem;
+    font-size: 80%;
+    background-color: var(--form-error-color);
+    color: #fff;
+    transition: all 800ms ease;
+  }
+
+  .contact-form-error.is-active {
+    display: block;
+    animation: show-message 1s 1 normal 0s ease-out both;
+  }
+
+  .contact-form-loader {
+    text-align: center;
+  }
+
+  .none {
+    display: none;
+  }
+
+  @keyframes show-message {
+    0% {
+      visibility: hidden;
+      opacity: 0;
+    }
+
+    100% {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+/* FOOTER */
+
+footer {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: space-between;
+}
+
+footer > section > article{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.redesSociales{
+  display:flex;
+  justify-content: center;
+}
+.redesSociales > a{
+  padding: 0 20px;
+}
+.redesSociales > a > i{
+  font-size: 40px;
+  color: black;
+}
+
+.mapa{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mapa >*{
+  padding: 0 10px;
+  color: #000;
+  text-decoration: none;
 }
