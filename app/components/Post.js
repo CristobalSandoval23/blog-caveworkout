@@ -1,15 +1,14 @@
 export function Post(prosp){
-    let {content ,date, title} = prosp;
+    let {usuario ,descripcion, nombre} = prosp;
 
-    let dateFormat = new Date(date).toLocaleString();
     return `
     <section class="post-page">
         <aside>
-            <h2> ${title.rendered}</h2>
-            <time datetime="${date}">${dateFormat}</time>
+            <h2> ${nombre}</h2>
+            <h3> creado por: ${usuario["nombre"]}</h3>
         </aside>
         <hr>
-        <article>${content.rendered}</article>
+        <article>${descripcion}</article>
     </section>
     `;
 }

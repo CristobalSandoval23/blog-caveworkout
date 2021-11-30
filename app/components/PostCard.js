@@ -1,8 +1,7 @@
 export function PostCard(props) {
-    let {date, id,slug, title, _embedded} = props;
-    let dateFormat = new Date(date).toLocaleString(),
-        urlPoster = _embedded["wp:featuredmedia"] 
-                    ? _embedded["wp:featuredmedia"][0].source_url 
+    let {nombre, precio, img, _id} = props;
+    let urlPoster = img 
+                    ? img
                     : "app/assest/loader.gif";
 
  document.addEventListener("click", e =>{
@@ -12,11 +11,11 @@ export function PostCard(props) {
  })                   
     return `
         <article class="post-card">
-            <img src="${urlPoster}" alt="${title.rendered}">
-            <h2>${title.rendered}</h2>
+            <img src="${urlPoster}" alt="${nombre}">
+            <h2>${nombre}</h2>
             <p>
-                <time datatime="${date}"> ${dateFormat}</time>
-                <a href="#/${slug}" data-id="${id}">Ver publicación</a>
+                <span>${precio}</span>
+                <a data-id="${_id}">Ver publicación</a>
             </p>
         </article>
     `;

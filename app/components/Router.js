@@ -1,15 +1,15 @@
 import api from "../helpers/wp_api.js";
-import { PostCard } from "./PostCard.js";
+import api_cw from "../helpers/cw_api.js";
 import { ajax } from "../helpers/ajax.js";
 import { Post } from "./Post.js";
 import { SearchCard } from "./SearchCard.js";
 import { ContactForm } from "./ContactForm.js";
 import { Login } from "./LoginForm.js";
 import { LoginPost } from "./LoginPost.js";
+import { PostCard } from "./PostCard.js";
 
 export async function Router(){
     const d = document,
-            w = window,
           $main = d.getElementById("main");
 
         let {hash} = location;
@@ -17,11 +17,15 @@ export async function Router(){
         $main.innerHTML = null;
 
         if(!hash || hash === "#/"){
-           await ajax({
-                url: api.POSTS,
+            localStorage.setItem("continuar",true)
+            let url = `${api_cw.PRODUCTOS}?limite=${api_cw.limite}&desde=${api_cw.desde}`,
+            method = "GET";
+            await ajax({
+                url,
+                method,
                 cbSuccess:(posts)=>{
-                    let html ="";
-                    posts.forEach(post => html += PostCard(post));
+                    let html = "";
+                    posts["data"].forEach(post => html += PostCard(post));
                     $main.innerHTML = html;
                 }
             })
@@ -71,10 +75,12 @@ export async function Router(){
             })
         }else{
             $main.innerHTML = `<h2>Aqui cargará el contenido de el post previamente seleccionado </h2>`
+            api_cw.limite = 5, api_cw.desde = 0, api_cw.continuar = true;
+            localStorage.setItem("continuar", true)
+            console.log(api_cw.limite, api_cw.desde, api_cw.continuar)
             await ajax({
-                url: `${api.POST}/${localStorage.getItem("wpPostId")}`,
+                url: `${api_cw.PRODUCTOS}/${localStorage.getItem("wpPostId")}`,
                 cbSuccess:(post)=>{
-
                     location.hash = `#/${localStorage.getItem("wpPostId")}`
                     $main.innerHTML = Post(post);
                 }
