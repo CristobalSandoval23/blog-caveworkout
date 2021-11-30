@@ -41,7 +41,9 @@ export  function InfiniteScroll(){
                     cbSuccess: (posts)=>{
                         let html = "";
                         posts.forEach(post => html += Component(post));
-                        if(location.hash.includes("#/contacto") || location.hash.includes("#/login")) return false;                        
+                        if(location.hash.includes("#/contacto") 
+                        || location.hash.includes("#/login")
+                        || (location.hash.includes("#/search") && localStorage.getItem("wpSearch") === null)) return false;                        
                         d.getElementById("main").insertAdjacentHTML("beforeend", html);
                         d.querySelector(".loader").style.display = "block";
                     }

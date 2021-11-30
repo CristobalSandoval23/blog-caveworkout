@@ -40,7 +40,7 @@ export async function Router(){
                     if(search.length === 0){
                         html = `
                         <p class="error"> 
-                        No exsten resultados de búsqueda para el término
+                        No existen resultados de búsqueda para el término
                             <mark>${query}</mark>
                         </p>
                         `;
@@ -74,6 +74,8 @@ export async function Router(){
             await ajax({
                 url: `${api.POST}/${localStorage.getItem("wpPostId")}`,
                 cbSuccess:(post)=>{
+
+                    location.hash = `#/${localStorage.getItem("wpPostId")}`
                     $main.innerHTML = Post(post);
                 }
             })

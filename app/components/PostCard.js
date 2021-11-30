@@ -8,6 +8,7 @@ export function PostCard(props) {
  document.addEventListener("click", e =>{
      if(!e.target.matches(".post-card a")) return false;
      localStorage.setItem("wpPostId", e.target.dataset.id);
+     location.hash = `#/${localStorage.getItem("wpPostId")}`;
  })                   
     return `
         <article class="post-card">
