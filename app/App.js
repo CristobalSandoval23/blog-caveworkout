@@ -9,7 +9,7 @@ export function App() {
         $root.innerHTML = null;
         $root.appendChild(Header())
         $root.appendChild(Main())
-        $root.appendChild(Footer())
+        $root.appendChild(Footer());
         $root.appendChild(Loader())
 
         Router();
