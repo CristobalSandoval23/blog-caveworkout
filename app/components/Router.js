@@ -27,6 +27,7 @@ export async function Router(){
                     await posts["data"].forEach(post => html += PostCard(post));
                     $main.innerHTML = html;
                         localStorage.setItem("totalPost", posts["total"])
+                        localStorage.setItem("totalElement", $main.childElementCount)
                         api_cw.limite += 10;
                         api_cw.desde += 10;
                 }

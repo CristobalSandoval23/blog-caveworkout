@@ -15,11 +15,11 @@ export  function InfiniteScroll(){
         Component;
         
         d.addEventListener("scroll", async (e)=> {
-        
+            
             let {scrollTop, clientHeight, scrollHeight} = d.documentElement,
                 {hash} = w.location;
-            
-            if(scrollTop + clientHeight +300>=  scrollHeight){
+            // if(Number(localStorage.getItem("totalPost")) < Number(localStorage.getItem("totalElement"))) return false;
+            if(scrollTop + clientHeight >=  scrollHeight){
                 if(!hash || hash === "#/"){
                     localStorage.setItem("totalElement", $main.childElementCount)
                     apiURL = `${api_cw.PRODUCTOS}?limite=${api_cw.limite}&desde=${api_cw.desde}`,
@@ -68,7 +68,8 @@ export  function InfiniteScroll(){
                 }else{
                     let html = ""; 
                     if(($main.lastElementChild.className === "proximamente") === true){
-                        d.querySelector("html").style.overflow = "visible"
+                        console.log("entre")
+                        d.querySelector("html").style.overflow = "visible";
                           return false;
                       };
 
@@ -77,8 +78,7 @@ export  function InfiniteScroll(){
                           <h3 class="proximamente">Proximamente <br> nuevos contenidos ${$main.childElementCount}-${localStorage.getItem("totalElement")}</h3>
                       `;
                       await $main.insertAdjacentHTML("beforeend", html);
-                      d.querySelector("html").style.overflow = "visible"
-                    
+                      d.querySelector("html").style.overflow = "visible";
                 }
             }
         })
