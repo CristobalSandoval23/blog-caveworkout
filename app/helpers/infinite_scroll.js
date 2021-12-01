@@ -40,6 +40,17 @@ export  function InfiniteScroll(){
                 else{
                     return false;
                 }       
+
+                if(Number(localStorage.getItem("totalPost")) +1< Number(localStorage.getItem("totalElement"))){
+                    let inicio  = Number(localStorage.getItem("totalPost"));
+                    let final = Number(localStorage.getItem("totalElement"));
+                    console.log("holasdaksdnla", d.querySelectorAll("article").length)
+                    for (let index = inicio; index < final; index++) {
+                        let numero = d.querySelectorAll("article").length
+                        console.log(numero)
+                        d.querySelectorAll("article")[numero].remove()    
+                    }
+                }
                 if(Number(localStorage.getItem("totalPost")) > $main.childElementCount){
                     console.log("----")
                     d.querySelector("html").style.overflow = "hidden"
@@ -64,8 +75,8 @@ export  function InfiniteScroll(){
                        }
                       }); 
                 }else{
-                    let html = ""; 
-                    if(($main.lastElementChild.className === "proximamente") === true){
+                    let html = "";
+                    if(($main.lastElementChild.className === "proximamente") === true){                       
                         d.querySelector("html").style.overflow = "visible";
                           return false;
                       };
