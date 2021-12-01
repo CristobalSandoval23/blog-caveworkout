@@ -1,4 +1,3 @@
-import api from "./wp_api.js";
 import api_cw from "./cw_api.js";
 import {ajax} from "./ajax.js";
 import {SearchCard} from "../components/SearchCard.js";
@@ -43,7 +42,7 @@ export  function InfiniteScroll(){
                 }       
                 if(Number(localStorage.getItem("totalPost")) > $main.childElementCount){
                     console.log("----")
-                    
+                    d.querySelector("html").style.overflow = "hidden"
                     await ajax({
                        url: apiURL,
                        method,
