@@ -19,7 +19,7 @@ export  function InfiniteScroll(){
             let {scrollTop, clientHeight, scrollHeight} = d.documentElement,
                 {hash} = w.location;
             // if(Number(localStorage.getItem("totalPost")) < Number(localStorage.getItem("totalElement"))) return false;
-            if(scrollTop + clientHeight >=  scrollHeight){
+            if(scrollTop + clientHeight + 200>=  scrollHeight){
                 if(!hash || hash === "#/"){
                     localStorage.setItem("totalElement", $main.childElementCount)
                     apiURL = `${api_cw.PRODUCTOS}?limite=${api_cw.limite}&desde=${api_cw.desde}`,
