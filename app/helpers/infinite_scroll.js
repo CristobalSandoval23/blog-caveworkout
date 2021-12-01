@@ -6,7 +6,8 @@ import {PostCard} from "../components/PostCard.js";
 
 export  function InfiniteScroll(){
     const d = document,
-          w = window;
+          w = window,
+          $main = d.getElementById("main");
 
     let query = localStorage.getItem("wpSearch"),
         apiURL,
@@ -19,10 +20,8 @@ export  function InfiniteScroll(){
                 {hash} = w.location;
            
             if(scrollTop + clientHeight +300>=  scrollHeight){
- 
                 if(!hash || hash === "#/"){
-                    api_cw.limite += 5;
-                    api_cw.desde += 5;
+                    localStorage.setItem("totalElement", $main.childElementCount)
                     apiURL = `${api_cw.PRODUCTOS}?limite=${api_cw.limite}&desde=${api_cw.desde}`,
                     method = "GET";
                     Component = PostCard;
@@ -41,46 +40,46 @@ export  function InfiniteScroll(){
                 else{
                     return false;
                 }       
-
-                 await ajax({
-                    url: apiURL,
-                    method,
-                    cbSuccess: async(posts)=>{
-                        let html = "";                                    
-                    
-                       if(posts["total"] > d.getElementById("main").childElementCount){
-                            (localStorage.getItem("continuar") === "true") 
-                            ? await posts["data"].forEach(post => html += Component(post))
-                            : console.log("entree");
-                            if(location.hash.includes("#/contacto") 
-                            || location.hash.includes("#/login")
-                            || (location.hash.includes("#/search") && localStorage.getItem("wpSearch") === null)
-                            || location.hash.includes(`${localStorage.getItem("wpPostId")}`)) return false;                        
-                            d.getElementById("main").insertAdjacentHTML("beforeend", html);
-                            d.querySelector(".loader").style.display = "block";
-                       }else{
-                           
-                           if((d.getElementById("main").lastElementChild.className === "proximamente") === true){
-                               
-                               return false;
-                           };
-                           
-                           d.querySelector(".loader").style.display = "none";  
-                           html = `
-                               <h3 class="proximamente">Proximamente <br> nuevos contenidos</h3>
-                           `;
-                           d.getElementById("main").insertAdjacentHTML("beforeend", html);
-                           localStorage.setItem("continuar", false)
-                          
-                       }
-                        // if(posts["data"].length === 0 ){
-                        // } else{        
-
-                         
+                if(Number(localStorage.getItem("totalPost")) > $main.childElementCount){
+                    console.log("----")
+                    d.querySelector("html").style.overflow = "hidden"
+                    await ajax({
+                       url: apiURL,
+                       method,
+                       cbSuccess: async(posts)=>{
+                           let html = "";                                    
+                           localStorage.setItem("totalPost", posts["total"])
+                          if(posts["data"].length !== 0){ 
                             
-                        // }                        
-                    }
-                   }); 
+                            console.log("----1----", posts["data"])                           
+                               await posts["data"].forEach(post => html += Component(post))
+                               if(location.hash.includes("#/contacto") 
+                               || location.hash.includes("#/login")
+                               || (location.hash.includes("#/search") && localStorage.getItem("wpSearch") === null)
+                               || location.hash.includes(`${localStorage.getItem("wpPostId")}`)) return false;                        
+                               await $main.insertAdjacentHTML("beforeend", html);
+                               d.querySelector(".loader").style.display = "block";
+                               d.querySelector("html").style.overflow = "visible";
+                               api_cw.limite += 10;
+                               api_cw.desde += 10;
+                          }               
+                       }
+                      }); 
+                }else{
+                    let html = ""; 
+                    if(($main.lastElementChild.className === "proximamente") === true){
+                        d.querySelector("html").style.overflow = "visible"
+                          return false;
+                      };
+
+                      d.querySelector(".loader").style.display = "none";  
+                      html = `
+                          <h3 class="proximamente">Proximamente <br> nuevos contenidos</h3>
+                      `;
+                      await $main.insertAdjacentHTML("beforeend", html);
+                      d.querySelector("html").style.overflow = "visible"
+                    
+                }
             }
         })
 }

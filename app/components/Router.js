@@ -16,17 +16,19 @@ export async function Router(){
 
         $main.innerHTML = null;
 
-        if(!hash || hash === "#/"){
-            localStorage.setItem("continuar",true)
+        if(!hash || hash === "#/"){          
             let url = `${api_cw.PRODUCTOS}?limite=${api_cw.limite}&desde=${api_cw.desde}`,
             method = "GET";
             await ajax({
                 url,
                 method,
-                cbSuccess:(posts)=>{
+                cbSuccess: async(posts)=>{
                     let html = "";
-                    posts["data"].forEach(post => html += PostCard(post));
+                    await posts["data"].forEach(post => html += PostCard(post));
                     $main.innerHTML = html;
+                        localStorage.setItem("totalPost", posts["total"])
+                        api_cw.limite += 10;
+                        api_cw.desde += 10;
                 }
             })
         } else if(hash.includes("#/search")){
@@ -76,9 +78,7 @@ export async function Router(){
             })
         }else{
             $main.innerHTML = `<h2>Aqui cargará el contenido de el post previamente seleccionado </h2>`
-            api_cw.limite = 5, api_cw.desde = 0;
-            // localStorage.setItem("continuar", true)
-            console.log(api_cw.limite, api_cw.desde)
+            api_cw.limite = 10, api_cw.desde = 0;
             await ajax({
                 url: `${api_cw.PRODUCTOS}/${localStorage.getItem("wpPostId")}`,
                 cbSuccess:(post)=>{
