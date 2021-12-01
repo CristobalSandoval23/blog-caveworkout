@@ -20,6 +20,7 @@ export  function InfiniteScroll(){
                 {hash} = w.location;
             // if(Number(localStorage.getItem("totalPost")) < Number(localStorage.getItem("totalElement"))) return false;
             if(scrollTop + clientHeight + 200>=  scrollHeight){
+                d.querySelector("html").style.overflow = "hidden"
                 if(!hash || hash === "#/"){
                     localStorage.setItem("totalElement", $main.childElementCount)
                     apiURL = `${api_cw.PRODUCTOS}?limite=${api_cw.limite}&desde=${api_cw.desde}`,
@@ -42,7 +43,7 @@ export  function InfiniteScroll(){
                 }       
                 if(Number(localStorage.getItem("totalPost")) > $main.childElementCount){
                     console.log("----")
-                    d.querySelector("html").style.overflow = "hidden"
+                    
                     await ajax({
                        url: apiURL,
                        method,
