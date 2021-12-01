@@ -18,10 +18,10 @@ export  function InfiniteScroll(){
             
             let {scrollTop, clientHeight, scrollHeight} = d.documentElement,
                 {hash} = w.location;
-            // if(Number(localStorage.getItem("totalPost")) < Number(localStorage.getItem("totalElement"))) return false;
+
             if(scrollTop + clientHeight + 200>=  scrollHeight){
-                d.querySelector("html").style.overflow = "hidden"
                 if(!hash || hash === "#/"){
+                    d.querySelector("html").style.overflow = "hidden"
                     localStorage.setItem("totalElement", $main.childElementCount)
                     apiURL = `${api_cw.PRODUCTOS}?limite=${api_cw.limite}&desde=${api_cw.desde}`,
                     method = "GET";
@@ -50,9 +50,7 @@ export  function InfiniteScroll(){
                        cbSuccess: async(posts)=>{
                            let html = "";                                    
                            localStorage.setItem("totalPost", posts["total"])
-                          if(posts["data"].length !== 0){ 
-                            
-                            console.log("----1----", posts["data"])                           
+                          if(posts["data"].length !== 0){                         
                                await posts["data"].forEach(post => html += Component(post))
                                if(location.hash.includes("#/contacto") 
                                || location.hash.includes("#/login")
@@ -69,14 +67,13 @@ export  function InfiniteScroll(){
                 }else{
                     let html = ""; 
                     if(($main.lastElementChild.className === "proximamente") === true){
-                        console.log("entre")
                         d.querySelector("html").style.overflow = "visible";
                           return false;
                       };
 
                       d.querySelector(".loader").style.display = "none";  
                       html = `
-                          <h3 class="proximamente">Proximamente <br> nuevos contenidos ${$main.childElementCount}-${localStorage.getItem("totalElement")}</h3>
+                          <h3 class="proximamente">Proximamente <br> nuevos contenidos ${localStorage.getItem("totalPost")}-${localStorage.getItem("totalElement")}</h3>
                       `;
                       await $main.insertAdjacentHTML("beforeend", html);
                       d.querySelector("html").style.overflow = "visible";

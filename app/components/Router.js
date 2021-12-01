@@ -1,4 +1,3 @@
-import api from "../helpers/wp_api.js";
 import api_cw from "../helpers/cw_api.js";
 import { ajax } from "../helpers/ajax.js";
 import { Post } from "./Post.js";
