@@ -16,7 +16,8 @@ export async function Router(){
 
         $main.innerHTML = null;
 
-        if(!hash || hash === "#/"){          
+        if(!hash || hash === "#/"){  
+            d.querySelector("html").style.overflow = "hidden";
             let url = `${api_cw.PRODUCTOS}?limite=${api_cw.limite}&desde=${api_cw.desde}`,
             method = "GET";
             await ajax({
@@ -30,6 +31,7 @@ export async function Router(){
                         localStorage.setItem("totalElement", $main.childElementCount)
                         api_cw.limite += 10;
                         api_cw.desde += 10;
+                        d.querySelector("html").style.overflow = "visible";
                 }
             })
         } else if(hash.includes("#/search")){
