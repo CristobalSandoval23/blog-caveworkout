@@ -14,8 +14,10 @@ export async function Router(){
         let {hash} = location;
 
         $main.innerHTML = null;
-
+        api_cw.limite = 10;
+        api_cw.desde = 0;
         if(!hash || hash === "#/"){  
+    
             d.querySelector("html").style.overflow = "hidden";
             let url = `${api_cw.PRODUCTOS}?limite=${api_cw.limite}&desde=${api_cw.desde}`,
             method = "GET";
@@ -23,6 +25,7 @@ export async function Router(){
                 url,
                 method,
                 cbSuccess: async(posts)=>{
+                    console.log(posts["data"])
                     let html = "";
                     await posts["data"].forEach(post => html += PostCard(post));
                     $main.innerHTML = html;
@@ -64,20 +67,10 @@ export async function Router(){
             $main.appendChild(ContactForm());
             
         } else if(hash.includes("#/login")){
-            
             $main.appendChild(Login());
         } else if(hash.includes("#/usuario")){
-              let url = "https://mi-primer-restserver.herokuapp.com/api/productos?limite=5",
-                  method = "GET";
-          await ajax({
-                url,
-                method,
-                cbSuccess:(posts)=>{
-                    let html = "";
-                    posts["data"].forEach(post => html += LoginPost(post));
-                    $main.innerHTML = html;
-                }
-            })
+            
+            $main.innerHTML = `<h2>Aqui será en donde se subiran los post </h2>`
         }else{
             $main.innerHTML = `<h2>Aqui cargará el contenido de el post previamente seleccionado </h2>`
             await ajax({
