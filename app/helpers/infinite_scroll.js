@@ -26,8 +26,8 @@ export  function InfiniteScroll(){
                     method = "GET";
                     Component = PostCard;
                 } else if(hash.includes("#/search")){
-                    api_cw.limite += 15;
-                    api_cw.desde += 0;
+                    api_cw.limite += 10;
+                    api_cw.desde += 10;
                     apiURL = `${api_cw.SEARCH}/productos/${query}`
                     Component = SearchCard;
                 }else if(hash.includes("#/contacto")){
