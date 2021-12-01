@@ -38,10 +38,10 @@ export async function Router(){
                 return false;
             }
             await ajax({
-                url: `${api.SEARCH}${query}`,
+                url: `${api_cw.SEARCH}/productos/${query}`,
                 cbSuccess:(search)=>{
                     let html = "";
-                    if(search.length === 0){
+                    if(search["results"].length === 0){
                         html = `
                         <p class="error"> 
                         No existen resultados de búsqueda para el término
@@ -50,7 +50,8 @@ export async function Router(){
                         `;
 
                     }else{
-                        search.forEach((post)=> (html += SearchCard(post)))
+                        console.log(search["results"]);
+                        // search["results"].forEach((post)=> (html += SearchCard(post)))
                     }
                     $main.innerHTML = html;
                 }
@@ -75,9 +76,9 @@ export async function Router(){
             })
         }else{
             $main.innerHTML = `<h2>Aqui cargará el contenido de el post previamente seleccionado </h2>`
-            api_cw.limite = 5, api_cw.desde = 0, api_cw.continuar = true;
-            localStorage.setItem("continuar", true)
-            console.log(api_cw.limite, api_cw.desde, api_cw.continuar)
+            api_cw.limite = 5, api_cw.desde = 0;
+            // localStorage.setItem("continuar", true)
+            console.log(api_cw.limite, api_cw.desde)
             await ajax({
                 url: `${api_cw.PRODUCTOS}/${localStorage.getItem("wpPostId")}`,
                 cbSuccess:(post)=>{

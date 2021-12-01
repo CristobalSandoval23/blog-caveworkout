@@ -18,7 +18,7 @@ export  function InfiniteScroll(){
             let {scrollTop, clientHeight, scrollHeight} = d.documentElement,
                 {hash} = w.location;
            
-            if(scrollTop + clientHeight + 100 >=  scrollHeight){
+            if(scrollTop + clientHeight +300>=  scrollHeight){
  
                 if(!hash || hash === "#/"){
                     api_cw.limite += 5;
@@ -27,7 +27,9 @@ export  function InfiniteScroll(){
                     method = "GET";
                     Component = PostCard;
                 } else if(hash.includes("#/search")){
-                    apiURL = `${api.SEARCH}${query}&page=${api.page}`
+                    api_cw.limite += 15;
+                    api_cw.desde += 0;
+                    apiURL = `${api_cw.SEARCH}/productos/${query}`
                     Component = SearchCard;
                 }else if(hash.includes("#/contacto")){
                     console.log("Contacto")
@@ -45,25 +47,38 @@ export  function InfiniteScroll(){
                     method,
                     cbSuccess: async(posts)=>{
                         let html = "";                                    
-                        if((d.getElementById("main").lastElementChild.className === "proximamente") === true)return;
-                        
-                        if(posts["data"].length === 0 ){
-                                d.querySelector(".loader").style.display = "none";  
-                                html = `
-                                    <h3 class="proximamente">Proximamente <br> nuevos contenidos</h3>
-                                `;
-                                d.getElementById("main").insertAdjacentHTML("beforeend", html);
-                                localStorage.setItem("continuar", false)
-                        } else{        
-                           await posts["data"].forEach(post => html += Component(post));
+                    
+                       if(posts["total"] > d.getElementById("main").childElementCount){
+                            (localStorage.getItem("continuar") === "true") 
+                            ? await posts["data"].forEach(post => html += Component(post))
+                            : console.log("entree");
                             if(location.hash.includes("#/contacto") 
                             || location.hash.includes("#/login")
                             || (location.hash.includes("#/search") && localStorage.getItem("wpSearch") === null)
                             || location.hash.includes(`${localStorage.getItem("wpPostId")}`)) return false;                        
                             d.getElementById("main").insertAdjacentHTML("beforeend", html);
                             d.querySelector(".loader").style.display = "block";
+                       }else{
+                           
+                           if((d.getElementById("main").lastElementChild.className === "proximamente") === true){
+                               
+                               return false;
+                           };
+                           
+                           d.querySelector(".loader").style.display = "none";  
+                           html = `
+                               <h3 class="proximamente">Proximamente <br> nuevos contenidos</h3>
+                           `;
+                           d.getElementById("main").insertAdjacentHTML("beforeend", html);
+                           localStorage.setItem("continuar", false)
                           
-                        }                        
+                       }
+                        // if(posts["data"].length === 0 ){
+                        // } else{        
+
+                         
+                            
+                        // }                        
                     }
                    }); 
             }
