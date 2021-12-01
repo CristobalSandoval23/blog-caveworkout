@@ -78,12 +78,13 @@ export async function Router(){
             })
         }else{
             $main.innerHTML = `<h2>Aqui cargará el contenido de el post previamente seleccionado </h2>`
-            api_cw.limite = 10, api_cw.desde = 0;
             await ajax({
                 url: `${api_cw.PRODUCTOS}/${localStorage.getItem("wpPostId")}`,
                 cbSuccess:(post)=>{
                     location.hash = `#/${localStorage.getItem("wpPostId")}`
                     $main.innerHTML = Post(post);
+                    api_cw.limite = 10, api_cw.desde = 0;
+                    localStorage.setItem("totalElement", 0)
                 }
             })
         }

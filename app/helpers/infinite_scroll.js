@@ -18,7 +18,7 @@ export  function InfiniteScroll(){
         
             let {scrollTop, clientHeight, scrollHeight} = d.documentElement,
                 {hash} = w.location;
-           
+            
             if(scrollTop + clientHeight +300>=  scrollHeight){
                 if(!hash || hash === "#/"){
                     localStorage.setItem("totalElement", $main.childElementCount)
@@ -74,7 +74,7 @@ export  function InfiniteScroll(){
 
                       d.querySelector(".loader").style.display = "none";  
                       html = `
-                          <h3 class="proximamente">Proximamente <br> nuevos contenidos</h3>
+                          <h3 class="proximamente">Proximamente <br> nuevos contenidos ${$main.childElementCount}-${localStorage.getItem("totalElement")}</h3>
                       `;
                       await $main.insertAdjacentHTML("beforeend", html);
                       d.querySelector("html").style.overflow = "visible"
