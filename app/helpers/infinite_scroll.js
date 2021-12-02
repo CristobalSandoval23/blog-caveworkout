@@ -19,8 +19,8 @@ export  function InfiniteScroll(){
                 {hash} = w.location;
             console.log(offsetHeight, w.scrollY)
             localStorage.setItem("scrollTop", w.scrollY)
-            localStorage.setItem("clientHeight", w.outerHeight)
-            localStorage.setItem("totalScroll", scrollTop + clientHeight)
+            localStorage.setItem("clientHeight", w.innerHeight)
+            localStorage.setItem("totalScroll", w.scrollY + w.innerHeight)
             localStorage.setItem("scrollHeight", scrollHeight)
             if( w.scrollY + w.innerHeight === scrollHeight){
                 console.log("scroll se activa")
