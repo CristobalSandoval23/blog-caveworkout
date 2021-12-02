@@ -17,7 +17,7 @@ export  function InfiniteScroll(){
             
             let {scrollTop, clientHeight, scrollHeight} = d.documentElement,
                 {hash} = w.location;
-            console.log(scrollTop + clientHeight, scrollHeight)
+            console.log(scrollTop + clientHeight + 5, scrollHeight)
             
             if(scrollTop + clientHeight ===  scrollHeight){
                 console.log("scroll se activa")
@@ -80,7 +80,11 @@ export  function InfiniteScroll(){
 
                       d.querySelector(".loader").style.display = "none";  
                       html = `
-                          <h3 class="proximamente">Proximamente <br> nuevos contenidos ${localStorage.getItem("totalPost")}-${localStorage.getItem("totalElement")}</h3>
+                          <h3 class="proximamente">
+                          Proximamente <br> 
+                          nuevos contenidos ${localStorage.getItem("totalPost")}-${localStorage.getItem("totalElement")}
+                          <br> ${scrollTop + clientHeight}-${scrollHeight}
+                           </h3>
                       `;
                       await $main.insertAdjacentHTML("beforeend", html);
                       
