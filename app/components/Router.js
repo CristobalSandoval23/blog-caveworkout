@@ -16,6 +16,7 @@ export async function Router(){
         $main.innerHTML = null;
         api_cw.limite = 10;
         api_cw.desde = 0;
+        localStorage.setItem("Pagina", false)
         if(!hash || hash === "#/"){  
     
             let url = `${api_cw.PRODUCTOS}?limite=${api_cw.limite}&desde=${api_cw.desde}`,
@@ -63,6 +64,7 @@ export async function Router(){
                 }
             })
         } else if(hash.includes("#/contacto")){
+            
             $main.appendChild(ContactForm());
             
         } else if(hash.includes("#/login")){

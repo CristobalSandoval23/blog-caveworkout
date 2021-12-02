@@ -34,6 +34,7 @@ export  function InfiniteScroll(){
                     apiURL = `${api_cw.SEARCH}/productos/${query}`
                     Component = SearchCard;
                 }else if(hash.includes("#/contacto")){
+                    
                     console.log(api_cw.limite, api_cw.desde)
                     console.log("Contacto")
                     return false;
@@ -44,9 +45,10 @@ export  function InfiniteScroll(){
                 else{
                     return false;
                 }       
-                // if(d.querySelector(".loader").style.display === "block"){
-                //     return false;
-                // }
+                if(localStorage.getItem("Pagina") === "false"){
+                    console.log("sali")
+                    return false;
+                }
 
                 if(Number(localStorage.getItem("totalPost")) > $main.childElementCount){
                     console.log("Se invoco el fetch")
