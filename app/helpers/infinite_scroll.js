@@ -15,15 +15,15 @@ export  function InfiniteScroll(){
         
         d.addEventListener("scroll", async (e)=> {
             
-            let {scrollTop, clientHeight, scrollHeight} = d.documentElement,
+            let {scrollTop, clientHeight, scrollHeight, offsetHeight} = d.documentElement,
                 {hash} = w.location;
-            console.log(scrollTop, clientHeight, scrollTop + clientHeight, scrollHeight, w.scrollY)
-            
+            console.log(offsetHeight )
+            let porcentaje = scrollHeight
             localStorage.setItem("scrollTop", scrollTop)
             localStorage.setItem("clientHeight", clientHeight)
             localStorage.setItem("totalScroll", scrollTop + clientHeight)
             localStorage.setItem("scrollHeight", scrollHeight)
-            if(scrollTop + clientHeight === scrollHeight){
+            if(scrollTop + clientHeight >= scrollHeight){
                 console.log("scroll se activa")
                 if(!hash || hash === "#/"){
                     console.log("entro a inicio")
