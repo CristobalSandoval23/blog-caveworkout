@@ -17,7 +17,7 @@ export  function InfiniteScroll(){
             
             let {scrollTop, clientHeight, scrollHeight} = d.documentElement,
                 {hash} = w.location;
-            console.log(scrollTop + clientHeight + 5, scrollHeight)
+            console.log(scrollTop, clientHeight, scrollTop + clientHeight, scrollHeight, w.scrollY)
             
             if(scrollTop + clientHeight === scrollHeight){
                 console.log("scroll se activa")
