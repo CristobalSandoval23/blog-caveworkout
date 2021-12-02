@@ -14,7 +14,9 @@ export  function InfiniteScroll(){
         Component;
         
         d.addEventListener("scroll", async (e)=> {
-            
+            // w.menubar.visible = no;
+            console.log(w.menubar.visible)
+            localStorage.setItem("menubar", w.menubar.visible)
             let {scrollTop, clientHeight, scrollHeight, offsetHeight} = d.documentElement,
                 {hash} = w.location;
             console.log(offsetHeight, w.scrollY)
@@ -22,6 +24,7 @@ export  function InfiniteScroll(){
             localStorage.setItem("clientHeight", w.outerHeight)
             localStorage.setItem("totalScroll", w.scrollY + w.innerHeight)
             localStorage.setItem("scrollHeight", scrollHeight)
+            // if()
             if( w.scrollY + w.outerHeight >= scrollHeight ){
                 console.log("scroll se activa")
                 if(!hash || hash === "#/"){

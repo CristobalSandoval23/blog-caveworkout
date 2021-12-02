@@ -9,10 +9,7 @@ export function Title() {
     // `;
     $h1.innerHTML = `
         <a href="${api.DOMAIN}" target="_blank" rel="noopener" >
-        ${localStorage.getItem("scrollTop")} -
-        ${localStorage.getItem("clientHeight")} -
-        ${localStorage.getItem("totalScroll")} -
-        ${localStorage.getItem("scrollHeight")}
+        ${localStorage.getItem("menubar")} -
         </a>
     `;
 

@@ -21,6 +21,8 @@ export async function Router(){
         localStorage.setItem("clientHeight",0)
         localStorage.setItem("totalScroll",0)
         localStorage.setItem("scrollHeight",0)
+
+       
         if(!hash || hash === "#/"){  
     
             let url = `${api_cw.PRODUCTOS}?limite=${api_cw.limite}&desde=${api_cw.desde}`,
