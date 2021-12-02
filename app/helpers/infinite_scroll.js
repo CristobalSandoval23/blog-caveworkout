@@ -17,13 +17,13 @@ export  function InfiniteScroll(){
             
             let {scrollTop, clientHeight, scrollHeight} = d.documentElement,
                 {hash} = w.location;
-            console.log(scrollTop, clientHeight, scrollHeight)
+            console.log(scrollTop + clientHeight, scrollHeight)
             
-            if(scrollTop + clientHeight + 200>=  scrollHeight){
+            if(scrollTop + clientHeight ===  scrollHeight){
                 console.log("scroll se activa")
                 if(!hash || hash === "#/"){
                     console.log("entro a inicio")
-                    d.querySelector("html").style.overflow = "hidden"
+                    
                     localStorage.setItem("totalElement", $main.childElementCount)
                     apiURL = `${api_cw.PRODUCTOS}?limite=${api_cw.limite}&desde=${api_cw.desde}`,
                     method = "GET";
@@ -44,10 +44,13 @@ export  function InfiniteScroll(){
                 else{
                     return false;
                 }       
+                // if(d.querySelector(".loader").style.display === "block"){
+                //     return false;
+                // }
 
                 if(Number(localStorage.getItem("totalPost")) > $main.childElementCount){
                     console.log("Se invoco el fetch")
-                    d.querySelector("html").style.overflow = "hidden"
+                    
                     await ajax({
                        url: apiURL,
                        method,
@@ -71,7 +74,7 @@ export  function InfiniteScroll(){
                 }else{
                     let html = "";
                     if(($main.lastElementChild.className === "proximamente") === true){                       
-                        d.querySelector("html").style.overflow = "scroll";
+                     
                           return false;
                       };
 
@@ -80,7 +83,7 @@ export  function InfiniteScroll(){
                           <h3 class="proximamente">Proximamente <br> nuevos contenidos ${localStorage.getItem("totalPost")}-${localStorage.getItem("totalElement")}</h3>
                       `;
                       await $main.insertAdjacentHTML("beforeend", html);
-                      d.querySelector("html").style.overflow = "scroll";
+                      
                 }
             }
         })
