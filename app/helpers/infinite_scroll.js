@@ -19,6 +19,10 @@ export  function InfiniteScroll(){
                 {hash} = w.location;
             console.log(scrollTop, clientHeight, scrollTop + clientHeight, scrollHeight, w.scrollY)
             
+            localStorage.setItem("scrollTop", scrollTop)
+            localStorage.setItem("clientHeight", clientHeight)
+            localStorage.setItem("totalScroll", scrollTop + clientHeight)
+            localStorage.setItem("scrollHeight", scrollHeight)
             if(scrollTop + clientHeight === scrollHeight){
                 console.log("scroll se activa")
                 if(!hash || hash === "#/"){
@@ -60,6 +64,7 @@ export  function InfiniteScroll(){
                            let html = "";                                    
                            localStorage.setItem("totalPost", posts["total"])
                           if(posts["data"].length !== 0){                         
+                              console.log("Se va a cargar los post")
                                await posts["data"].forEach(post => html += Component(post))
                                if(location.hash.includes("#/contacto") 
                                || location.hash.includes("#/login")
@@ -70,16 +75,17 @@ export  function InfiniteScroll(){
                                d.querySelector("html").style.overflow = "scroll";
                                api_cw.limite += 10;
                                api_cw.desde += 10;
-                          }               
+                          }else{
+                              console.log("No se va a cargar los post")
+                          }
+                                       
                        }
                       }); 
                 }else{
                     let html = "";
-                    if(($main.lastElementChild.className === "proximamente") === true){                       
-                     
+                    if(($main.lastElementChild.className === "proximamente") === true){                               
                           return false;
                       };
-
                       d.querySelector(".loader").style.display = "none";  
                       html = `
                           <h3 class="proximamente">
@@ -89,7 +95,6 @@ export  function InfiniteScroll(){
                            </h3>
                       `;
                       await $main.insertAdjacentHTML("beforeend", html);
-                      
                 }
             }
         })

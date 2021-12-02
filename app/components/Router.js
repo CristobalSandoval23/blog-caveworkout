@@ -17,6 +17,10 @@ export async function Router(){
         api_cw.limite = 10;
         api_cw.desde = 0;
         localStorage.setItem("Pagina", false)
+        localStorage.setItem("scrollTop",0)
+        localStorage.setItem("clientHeight",0)
+        localStorage.setItem("totalScroll",0)
+        localStorage.setItem("scrollHeight",0)
         if(!hash || hash === "#/"){  
     
             let url = `${api_cw.PRODUCTOS}?limite=${api_cw.limite}&desde=${api_cw.desde}`,
