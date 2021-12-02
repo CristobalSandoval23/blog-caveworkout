@@ -28,7 +28,7 @@ export  function InfiniteScroll(){
             localStorage.setItem("totalScroll", w.scrollY + w.innerHeight)
             localStorage.setItem("scrollHeight", scrollHeight)
             
-            if(NavegatorUser().sBrowser !== "Safari"){
+            if(NavegatorUser().sBrowser !== "Apple Safari"){
                 totalScroll = w.scrollY + w.outerHeight
                 comparar = totalScroll >= scrollHeight;
                 localStorage.setItem("navegador", `No soy safari ${NavegatorUser().sBrowser}`)
