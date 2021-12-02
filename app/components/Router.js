@@ -12,7 +12,7 @@ export async function Router(){
           $main = d.getElementById("main");
 
         let {hash} = location;
-    d.documentElement.scrollTop = 0;
+        d.documentElement.scrollTop = 0;
         $main.innerHTML = null;
         api_cw.limite = 10;
         api_cw.desde = 0;
