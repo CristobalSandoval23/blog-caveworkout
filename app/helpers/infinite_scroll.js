@@ -14,8 +14,8 @@ export  function InfiniteScroll(){
         Component;
         
         d.addEventListener("scroll", async (e)=> {
-            // w.menubar.visible = no;
-            console.log(w.menubar.visible)
+            w.open("http://www.cnn.com/", "scrollbars=no, menubar=no, resizable=no")
+            console.log(w.menubar["visible"])
             localStorage.setItem("menubar", w.menubar.visible)
             let {scrollTop, clientHeight, scrollHeight, offsetHeight} = d.documentElement,
                 {hash} = w.location;
