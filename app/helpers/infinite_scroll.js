@@ -22,7 +22,7 @@ export  function InfiniteScroll(){
             localStorage.setItem("clientHeight", w.innerHeight)
             localStorage.setItem("totalScroll", w.scrollY + w.innerHeight)
             localStorage.setItem("scrollHeight", scrollHeight)
-            if( w.scrollY + w.innerHeight >= scrollHeight){
+            if( w.scrollY + w.innerHeight >= scrollHeight -1){
                 console.log("scroll se activa")
                 if(!hash || hash === "#/"){
                     console.log("entro a inicio")
