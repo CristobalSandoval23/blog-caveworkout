@@ -17,9 +17,12 @@ export  function InfiniteScroll(){
             
             let {scrollTop, clientHeight, scrollHeight} = d.documentElement,
                 {hash} = w.location;
-
+            console.log(scrollTop, clientHeight, scrollHeight)
+            
             if(scrollTop + clientHeight + 200>=  scrollHeight){
+                console.log("scroll se activa")
                 if(!hash || hash === "#/"){
+                    console.log("entro a inicio")
                     d.querySelector("html").style.overflow = "hidden"
                     localStorage.setItem("totalElement", $main.childElementCount)
                     apiURL = `${api_cw.PRODUCTOS}?limite=${api_cw.limite}&desde=${api_cw.desde}`,
@@ -31,6 +34,7 @@ export  function InfiniteScroll(){
                     apiURL = `${api_cw.SEARCH}/productos/${query}`
                     Component = SearchCard;
                 }else if(hash.includes("#/contacto")){
+                    console.log(api_cw.limite, api_cw.desde)
                     console.log("Contacto")
                     return false;
                 }else if(hash.includes("#/usuario")){
@@ -41,18 +45,8 @@ export  function InfiniteScroll(){
                     return false;
                 }       
 
-                // if(Number(localStorage.getItem("totalPost")) +1< Number(localStorage.getItem("totalElement"))){
-                //     let inicio  = Number(localStorage.getItem("totalPost"));
-                //     let final = Number(localStorage.getItem("totalElement"));
-                //     console.log("holasdaksdnla", d.querySelectorAll("article").length)
-                //     for (let index = inicio; index < final; index++) {
-                //         let numero = d.querySelectorAll("article").length
-                //         console.log(numero)
-                //         d.querySelectorAll("article")[numero].remove()    
-                //     }
-                // }
                 if(Number(localStorage.getItem("totalPost")) > $main.childElementCount){
-                    console.log("----")
+                    console.log("Se invoco el fetch")
                     d.querySelector("html").style.overflow = "hidden"
                     await ajax({
                        url: apiURL,
@@ -68,7 +62,7 @@ export  function InfiniteScroll(){
                                || location.hash.includes(`${localStorage.getItem("wpPostId")}`)) return false;                        
                                await $main.insertAdjacentHTML("beforeend", html);
                                d.querySelector(".loader").style.display = "block";
-                               d.querySelector("html").style.overflow = "visible";
+                               d.querySelector("html").style.overflow = "scroll";
                                api_cw.limite += 10;
                                api_cw.desde += 10;
                           }               
@@ -77,7 +71,7 @@ export  function InfiniteScroll(){
                 }else{
                     let html = "";
                     if(($main.lastElementChild.className === "proximamente") === true){                       
-                        d.querySelector("html").style.overflow = "visible";
+                        d.querySelector("html").style.overflow = "scroll";
                           return false;
                       };
 
@@ -86,7 +80,7 @@ export  function InfiniteScroll(){
                           <h3 class="proximamente">Proximamente <br> nuevos contenidos ${localStorage.getItem("totalPost")}-${localStorage.getItem("totalElement")}</h3>
                       `;
                       await $main.insertAdjacentHTML("beforeend", html);
-                      d.querySelector("html").style.overflow = "visible";
+                      d.querySelector("html").style.overflow = "scroll";
                 }
             }
         })

@@ -12,28 +12,27 @@ export async function Router(){
           $main = d.getElementById("main");
 
         let {hash} = location;
-
+        d.documentElement.scrollTop = 0;
         $main.innerHTML = null;
         api_cw.limite = 10;
         api_cw.desde = 0;
         if(!hash || hash === "#/"){  
     
-            d.querySelector("html").style.overflow = "hidden";
             let url = `${api_cw.PRODUCTOS}?limite=${api_cw.limite}&desde=${api_cw.desde}`,
             method = "GET";
             await ajax({
                 url,
                 method,
-                cbSuccess: async(posts)=>{
-                    console.log(posts["data"])
+                cbSuccess: async(posts)=>{   
+                    console.log("get-inicial")                 
                     let html = "";
                     await posts["data"].forEach(post => html += PostCard(post));
                     $main.innerHTML = html;
                         localStorage.setItem("totalPost", posts["total"])
+                        localStorage.setItem("Pagina", true)
                         localStorage.setItem("totalElement", $main.childElementCount)
                         api_cw.limite += 10;
                         api_cw.desde += 10;
-                        d.querySelector("html").style.overflow = "visible";
                 }
             })
         } else if(hash.includes("#/search")){

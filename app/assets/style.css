@@ -23,6 +23,7 @@ html {
     font-family:var(--font-family-primary);
     font-size: var(--font-family-primary); 
     text-align: var(--text-align-title);
+    overflow: scroll;
 }
 
 *, 
@@ -63,7 +64,6 @@ footer{
 
 body {
     margin: 0;
-    overflow-x: hidden;
 }
 
 a{
