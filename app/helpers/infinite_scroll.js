@@ -19,7 +19,7 @@ export  function InfiniteScroll(){
                 {hash} = w.location;
             console.log(scrollTop + clientHeight + 5, scrollHeight)
             
-            if(scrollTop + clientHeight ===  scrollHeight){
+            if(scrollTop + clientHeight + 10 >  scrollHeight){
                 console.log("scroll se activa")
                 if(!hash || hash === "#/"){
                     console.log("entro a inicio")
