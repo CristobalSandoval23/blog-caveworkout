@@ -18,7 +18,7 @@ export  function InfiniteScroll(){
             let {scrollTop, clientHeight, scrollHeight, offsetHeight} = d.documentElement,
                 {hash} = w.location;
             console.log(offsetHeight, w.outerHeight)
-            localStorage.setItem("scrollTop", clientHeight)
+            localStorage.setItem("scrollTop", w.innerHeight)
             localStorage.setItem("clientHeight", w.outerHeight)
             localStorage.setItem("totalScroll", scrollTop + clientHeight)
             localStorage.setItem("scrollHeight", scrollHeight)
