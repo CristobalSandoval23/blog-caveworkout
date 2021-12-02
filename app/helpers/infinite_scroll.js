@@ -2,6 +2,7 @@ import api_cw from "./cw_api.js";
 import {ajax} from "./ajax.js";
 import {SearchCard} from "../components/SearchCard.js";
 import {PostCard} from "../components/PostCard.js";
+import { NavegatorUser } from "./navegator_user.js";
 
 export  function InfiniteScroll(){
     const d = document,
@@ -11,21 +12,34 @@ export  function InfiniteScroll(){
     let query = localStorage.getItem("wpSearch"),
         apiURL,
         method,
+        totalScroll,
+        comparar,
         Component;
         
         d.addEventListener("scroll", async (e)=> {
-            w.open("http://www.cnn.com/", "scrollbars=no, menubar=no, resizable=no")
-            console.log(w.menubar["visible"])
-            localStorage.setItem("menubar", w.menubar.visible)
+            
+            console.log(NavegatorUser())
+
             let {scrollTop, clientHeight, scrollHeight, offsetHeight} = d.documentElement,
                 {hash} = w.location;
-            console.log(offsetHeight, w.scrollY)
+
             localStorage.setItem("scrollTop", w.scrollY)
             localStorage.setItem("clientHeight", w.outerHeight)
             localStorage.setItem("totalScroll", w.scrollY + w.innerHeight)
             localStorage.setItem("scrollHeight", scrollHeight)
-            // if()
-            if( w.scrollY + w.outerHeight >= scrollHeight ){
+            
+            if(NavegatorUser().sBrowser !== "Safari"){
+                totalScroll = w.scrollY + w.outerHeight
+                comparar = totalScroll >= scrollHeight;
+                localStorage.setItem("navegador", `No soy safari ${NavegatorUser().sBrowser}`)
+            }else{
+                totalScroll = scrollTop + clientHeight  
+                comparar = totalScroll === scrollHeight;
+                localStorage.setItem("navegador", `Soy safari`)
+
+            }
+            
+            if(comparar){
                 console.log("scroll se activa")
                 if(!hash || hash === "#/"){
                     console.log("entro a inicio")

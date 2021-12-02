@@ -9,7 +9,7 @@ export function Title() {
     // `;
     $h1.innerHTML = `
         <a href="${api.DOMAIN}" target="_blank" rel="noopener" >
-        ${localStorage.getItem("menubar")} -
+        ${localStorage.getItem("navegador")} -
         </a>
     `;
 
