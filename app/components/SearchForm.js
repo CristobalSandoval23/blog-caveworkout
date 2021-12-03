@@ -28,7 +28,7 @@ export function SearchForm(){
         e.preventDefault();
 
         localStorage.setItem("wpSearch", e.target.search.value);
-        location.hash = `#/search?search=${localStorage.getItem("wpPostId")}`;
+        location.hash = `#/search?search=${e.target.search.value}`;
 
     })
     return $searchForm;

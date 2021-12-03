@@ -1,12 +1,11 @@
 export function SearchCard(props){
-let {id, title, _embedded} = props,
-    slug = _embedded
+let {_id, categoria} = props;
 
 return `
     <article class="post-card">
-        <h2> ${title}</h2>
+        <h2> ${categoria["nombre"]}</h2>
         <p>
-            <a href="#/${slug}" data-id="${id}">Ver publicación</a>
+            <a  href="#/${_id}"  data-id="${_id}">Ver publicación</a>
         </p>
     </article>
 `;

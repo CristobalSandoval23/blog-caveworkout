@@ -59,6 +59,8 @@ export function ContactForm(){
 
             d.addEventListener("submit", (e)=>{
                 e.preventDefault();
+
+                if(!location.hash.includes("#/contacto")) return false;
                 const $loader = d.querySelector(".contact-form-loader"),
                       $response = d.querySelector(".contact-form-response");
                      

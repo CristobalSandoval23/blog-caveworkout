@@ -4,7 +4,6 @@ import { Post } from "./Post.js";
 import { SearchCard } from "./SearchCard.js";
 import { ContactForm } from "./ContactForm.js";
 import { Login } from "./LoginForm.js";
-import { LoginPost } from "./LoginPost.js";
 import { PostCard } from "./PostCard.js";
 
 export async function Router(){
@@ -17,11 +16,6 @@ export async function Router(){
         api_cw.limite = 10;
         api_cw.desde = 0;
         localStorage.setItem("Pagina", false)
-        localStorage.setItem("scrollTop",0)
-        localStorage.setItem("clientHeight",0)
-        localStorage.setItem("totalScroll",0)
-        localStorage.setItem("scrollHeight",0)
-
        
         if(!hash || hash === "#/"){  
     
@@ -47,6 +41,7 @@ export async function Router(){
             let query = localStorage.getItem("wpSearch")
 
             if(!query){
+                console.log("vacio")
                 d.querySelector(".loader").style.display = "none";
                 return false;
             }
@@ -54,6 +49,7 @@ export async function Router(){
                 url: `${api_cw.SEARCH}/productos/${query}`,
                 cbSuccess:(search)=>{
                     let html = "";
+                    console.log("Entre aqui 1", search["results"].length)
                     if(search["results"].length === 0){
                         html = `
                         <p class="error"> 
@@ -64,9 +60,11 @@ export async function Router(){
 
                     }else{
                         console.log(search["results"]);
-                        // search["results"].forEach((post)=> (html += SearchCard(post)))
+                        search["results"].forEach((post)=> (html += SearchCard(post)))
+                        localStorage.setItem("totalPost", search["results"].length)
                     }
                     $main.innerHTML = html;
+                    localStorage.setItem("totalElement", $main.querySelectorAll("article").length)
                 }
             })
         } else if(hash.includes("#/contacto")){
@@ -83,10 +81,14 @@ export async function Router(){
             await ajax({
                 url: `${api_cw.PRODUCTOS}/${localStorage.getItem("wpPostId")}`,
                 cbSuccess:(post)=>{
-                    location.hash = `#/${localStorage.getItem("wpPostId")}`
+
+                    
+                    console.log("Entre aqui 2")
                     $main.innerHTML = Post(post);
+                    location.hash = `#/${localStorage.getItem("wpPostId")}`
                     api_cw.limite = 10, api_cw.desde = 0;
                     localStorage.setItem("totalElement", 0)
+                    localStorage.setItem("totalPost", 0)
                 }
             })
         }
