@@ -1,4 +1,4 @@
-export function NavegatorUser(){
+export function NavegatorUserAndDevice(){
 
     let sBrowser, sUsrAg = navigator.userAgent,
         sDevice = "";

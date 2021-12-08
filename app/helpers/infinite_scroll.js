@@ -2,7 +2,7 @@ import api_cw from "./cw_api.js";
 import {ajax} from "./ajax.js";
 import {SearchCard} from "../components/SearchCard.js";
 import {PostCard} from "../components/PostCard.js";
-import { NavegatorUser } from "./navegator_user.js";
+import { NavegatorUserAndDevice } from "./navegator_and_davice__user.js";
 
 export  function InfiniteScroll(){
     const d = document,
@@ -21,7 +21,7 @@ export  function InfiniteScroll(){
             let {scrollTop, clientHeight, scrollHeight} = d.documentElement,
                 {hash} = w.location;
             
-            if(NavegatorUser().sBrowser !== "Apple Safari" && NavegatorUser().sDevice === "Mobile"){
+            if(NavegatorUserAndDevice().sBrowser !== "Apple Safari" && NavegatorUser().sDevice === "Mobile"){
                 totalScroll = w.scrollY + w.outerHeight
                 comparar = totalScroll >= scrollHeight;
             }else{
