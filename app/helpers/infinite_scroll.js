@@ -21,7 +21,7 @@ export  function InfiniteScroll(){
             let {scrollTop, clientHeight, scrollHeight} = d.documentElement,
                 {hash} = w.location;
             
-            if(NavegatorUserAndDevice().sBrowser !== "Apple Safari" && NavegatorUser().sDevice === "Mobile"){
+            if(NavegatorUserAndDevice().sBrowser !== "Apple Safari" && NavegatorUserAndDevice().sDevice === "Mobile"){
                 totalScroll = w.scrollY + w.outerHeight
                 comparar = totalScroll >= scrollHeight;
             }else{
@@ -78,6 +78,7 @@ export  function InfiniteScroll(){
                        }
                       }); 
                 }else{
+                   
                     let html = "";
                     if(($main.lastElementChild.className === "proximamente") === true){                               
                           return false;
