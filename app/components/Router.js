@@ -5,7 +5,7 @@ import { SearchCard } from "./SearchCard.js";
 import { ContactForm } from "./ContactForm.js";
 import { Login } from "./LoginForm.js";
 import { PostCard } from "./PostCard.js";
-import { Dashboard } from "./dashboard.js";
+import { Dashboard } from "./Dashboard.js";
 
 export async function Router(){
     const d = document,
