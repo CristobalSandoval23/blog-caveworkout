@@ -5,6 +5,7 @@ import { SearchCard } from "./SearchCard.js";
 import { ContactForm } from "./ContactForm.js";
 import { Login } from "./LoginForm.js";
 import { PostCard } from "./PostCard.js";
+import { Dashboard } from "./dashboard.js";
 
 export async function Router(){
     const d = document,
@@ -72,10 +73,16 @@ export async function Router(){
             $main.appendChild(ContactForm());
             
         } else if(hash.includes("#/login")){
+            let fecha = new Date();
+            let expiracion = localStorage.getItem("expiration");
+            if(fecha.setTime(fecha) < fecha.setTime(expiracion)){
+                location.hash = "#/usuario";
+            }
             $main.appendChild(Login());
+
         } else if(hash.includes("#/usuario")){
             
-            $main.innerHTML = `<h2>Aqui será en donde se subiran los post </h2>`
+            $main.appendChild(Dashboard());
         }else{
             $main.innerHTML = `<h2>Aqui cargará el contenido de el post previamente seleccionado </h2>`
             await ajax({
