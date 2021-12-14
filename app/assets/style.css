@@ -195,12 +195,48 @@ img{
 }
 
 /* ********** MENU ********** */
-
+.menu{
+  display: flex;
+  flex-direction: column;
+}
 .menu > a{
   padding: 0 10px;
 }
+.menu{
+  position: fixed; 
+  top: 40px;
+  right: 0px;
+  height: 100%;
+  transition: 0.3s;
+  margin: 40px 0px 0px 0px;
+  background: #302d3c;
+  width: 0;
+  overflow: hidden;
+}
+.menu a{
+  display: inherit;
+  background: #302d3c;
+  text-align: center;
+  margin: 10px;
+  
+}
 .header-title{
   font-size: 25px;
+}
+
+.NavBtn{
+  display: flex;
+  justify-content: end;
+  width: 85%;
+  color: #eb2a41;
+  font-size: 45px;
+}
+.IconoHamburguesa{
+  position: relative;
+  left: 35px;
+}
+.IconoCruz.fas.fa-times{
+  opacity: 0;
 }
 
 /* LOGIN FORM*/
