@@ -23,6 +23,7 @@ export function BtnMenu(){
                 $IconoCruz.style.transition = '1s';
                 cerrado = false;
               }else{
+                console.log("hola")
                 $Menu.style.width = '0%';
                 $IconoHamburguesa.style.opacity = '1';
                 $IconoHamburguesa.style.transition = '1s';

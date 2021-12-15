@@ -195,48 +195,62 @@ img{
 }
 
 /* ********** MENU ********** */
-.menu{
+.header{
   display: flex;
-  flex-direction: column;
-}
-.menu > a{
-  padding: 0 10px;
-}
-.menu{
-  position: fixed; 
-  top: 40px;
-  right: 0px;
-  height: 100%;
-  transition: 0.3s;
-  margin: 40px 0px 0px 0px;
-  background: #302d3c;
-  width: 0;
-  overflow: hidden;
-}
-.menu a{
-  display: inherit;
-  background: #302d3c;
-  text-align: center;
-  margin: 10px;
-  
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
 }
 .header-title{
-  font-size: 25px;
+  font-size: 1.5rem;
+  display: inline;
+  padding: 0 0 0 10vw ;
+}
+.menu{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: fixed; 
+  z-index: 2;
+  right: 0;
+  top: 10vh;
+  width: 0%;
+  height: 100%;
+  transition: 0.3s;
+  border-radius: 10px 0;
+  background-color: #3e2992;
+  overflow: hidden;
+}
+
+.menu > a{
+  color: #fff;
+  padding: 10px;
+}
+
+.menu > a:hover{
+  background-color: aquamarine;
+  color: #000;
+  width: 100%;
 }
 
 .NavBtn{
-  display: flex;
-  justify-content: end;
+  display: inline;
   width: 85%;
   color: #eb2a41;
   font-size: 45px;
 }
 .IconoHamburguesa{
   position: relative;
-  left: 35px;
+  left: 48px;
 }
 .IconoCruz.fas.fa-times{
   opacity: 0;
+}
+.search-form{
+  position: absolute;
+  margin-top: 16vh;
+  /* display: none; */
 }
 
 /* LOGIN FORM*/
