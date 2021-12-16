@@ -15,6 +15,9 @@ export function SearchForm(){
      if(location.hash.includes("#/search")){
         $input.value = localStorage.getItem("wpSearch");
     }
+    if (location.hash.includes("#/usuario")) {
+        $searchForm.style.display = "none";
+    }
 
     d.addEventListener("search", e =>{
         if(!e.target.matches("input[type='search']")) return false;
