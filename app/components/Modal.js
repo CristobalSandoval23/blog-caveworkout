@@ -20,7 +20,7 @@ export function Modal(){
 			  <br>
 			<input type="submit" class="enviar" value="Enviar">
 			 <div class="contact-form-response none">
-				<p>Los datos han sido enviados</p>
+				<p>El procedimiento se realizó con éxito</p>
 		 	 </div>
 			</div>
 		</div>
@@ -30,19 +30,25 @@ export function Modal(){
 
 	function validationsForm(){
 		
-		const $btn = d.querySelector(".enviar");
+		const $btn = d.querySelector(".enviar"),
+			  $message = d.querySelector(".contact-form-response");
+		let datos = JSON.parse(localStorage.getItem("datos")) 
+		if (!location.hash.includes("/usuario")){
+			
+			d.querySelectorAll("input")[2].value = datos["nombre"],
+			d.querySelectorAll("input")[3].value = datos["descripcion"];
 
+		}
 		$btn.addEventListener("click", e=>{
 			e.preventDefault();
 
-				const categoria = "6139259d0e4c19c8e97cea71",
-					  nombre = d.querySelectorAll("input")[2].value,
-					  descripcion = d.querySelectorAll("input")[1].value,
-					  token = localStorage.getItem("token");  
-			console.log(nombre,descripcion)
-
-				let url = api.PRODUCTOS,
-					method = "POST",
+			const categoria = "6139259d0e4c19c8e97cea71",
+				  nombre = d.querySelectorAll("input")[2].value,
+				  descripcion = d.querySelectorAll("input")[3].value,
+				  token = localStorage.getItem("token");  
+			
+				let url = (location.hash.includes("/usuario"))? api.PRODUCTOS:`${api.PRODUCTOS}/${datos["_id"]}`,
+					method = (location.hash.includes("/usuario"))?"POST":"PUT",
 					headers = {
 						'Content-Type': 'application/json',
 						'x-token': `${token}`
@@ -52,16 +58,19 @@ export function Modal(){
 						nombre,
 						descripcion
 					  });
+					  console.log("estoy")
 				ajax({url,
 					method,
 					headers,
 					body,
 					cbSuccess:(json) =>{
 						console.log(json)
+						$message.classList.remove("none");
+						
 					}
 					})
 					.finally(()=> setTimeout(() =>{      
-						
+						(!location.hash.includes("/usuario"))?location.reload():"";
 					},3000));
             
 		})

@@ -6,6 +6,7 @@ import { ContactForm } from "./ContactForm.js";
 import { Login } from "./LoginForm.js";
 import { PostCard } from "./PostCard.js";
 import { Dashboard } from "./Dashboard.js";
+import { Modal } from "./Modal.js";
 
 export async function Router(){
     const d = document,
@@ -85,13 +86,13 @@ export async function Router(){
             $main.appendChild(Dashboard());
         }else{
             $main.innerHTML = `<h2>Aqui cargará el contenido de el post previamente seleccionado </h2>`
+            $main.appendChild(Modal());
             await ajax({
                 url: `${api_cw.PRODUCTOS}/${localStorage.getItem("wpPostId")}`,
                 cbSuccess:(post)=>{
-
-                    
-                    console.log("Entre aqui 2")
+                    localStorage.setItem("datos",JSON.stringify(post))
                     $main.innerHTML = Post(post);
+                    $main.appendChild(Modal());
                     location.hash = `#/${localStorage.getItem("wpPostId")}`
                     api_cw.limite = 10, api_cw.desde = 0;
                     localStorage.setItem("totalElement", 0)
