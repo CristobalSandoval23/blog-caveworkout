@@ -26,8 +26,7 @@ export async function Router(){
             await ajax({
                 url,
                 method,
-                cbSuccess: async(posts)=>{   
-                    console.log("get-inicial")                 
+                cbSuccess: async(posts)=>{                 
                     let html = "";
                     await posts["data"].forEach(post => html += PostCard(post));
                     $main.innerHTML = html;
@@ -38,20 +37,22 @@ export async function Router(){
                         api_cw.desde += 10;
                 }
             })
+
         } else if(hash.includes("#/search")){
 
             let query = localStorage.getItem("wpSearch")
 
             if(!query){
-                console.log("vacio")
                 d.querySelector(".loader").style.display = "none";
                 return false;
             }
+
             await ajax({
                 url: `${api_cw.SEARCH}/productos/${query}`,
                 cbSuccess:(search)=>{
+
                     let html = "";
-                    console.log("Entre aqui 1", search["results"].length)
+                   
                     if(search["results"].length === 0){
                         html = `
                         <p class="error"> 
@@ -59,20 +60,17 @@ export async function Router(){
                             <mark>${query}</mark>
                         </p>
                         `;
-
                     }else{
-                        console.log(search["results"]);
                         search["results"].forEach((post)=> (html += SearchCard(post)))
                         localStorage.setItem("totalPost", search["results"].length)
                     }
+
                     $main.innerHTML = html;
                     localStorage.setItem("totalElement", $main.querySelectorAll("article").length)
                 }
             })
         } else if(hash.includes("#/contacto")){
-            
             $main.appendChild(ContactForm());
-            
         } else if(hash.includes("#/login")){
             let fecha = new Date();
             let expiracion = localStorage.getItem("expiration");
@@ -80,19 +78,16 @@ export async function Router(){
                 location.hash = "#/usuario";
             }
             $main.appendChild(Login());
-
         } else if(hash.includes("#/usuario")){
-            
             $main.appendChild(Dashboard());
         }else{
-            $main.innerHTML = `<h2>Aqui cargará el contenido de el post previamente seleccionado </h2>`
-            $main.appendChild(Modal());
+            $main.innerHTML = `<h2>Aqui cargará el contenido de el post previamente seleccionado </h2>`;
             await ajax({
                 url: `${api_cw.PRODUCTOS}/${localStorage.getItem("wpPostId")}`,
                 cbSuccess:(post)=>{
                     localStorage.setItem("datos",JSON.stringify(post))
                     $main.innerHTML = Post(post);
-                    $main.appendChild(Modal());
+                    (localStorage.getItem("token") === null)? false: $main.appendChild(Modal());
                     location.hash = `#/${localStorage.getItem("wpPostId")}`
                     api_cw.limite = 10, api_cw.desde = 0;
                     localStorage.setItem("totalElement", 0)

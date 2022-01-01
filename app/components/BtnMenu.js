@@ -1,7 +1,7 @@
 export function BtnMenu(){
-    
-    
-    const  $btnMenu = document.createElement("div");
+       
+    const  d = document,
+         $btnMenu = d.createElement("div");
     let cerrado = true;
     $btnMenu.classList.add("NavBtn")
     $btnMenu.innerHTML = `
@@ -9,10 +9,10 @@ export function BtnMenu(){
     <i class="IconoCruz fas fa-times" id="IconoCruz"></i>  
     `;
         
-        document.addEventListener('click', (e)=>{
-          const $IconoHamburguesa = document.getElementById('IconoHamburguesa'),
-                $IconoCruz = document.getElementById('IconoCruz'),
-                $Menu = document.querySelector(".menu");
+        d.addEventListener('click', (e)=>{
+          const $IconoHamburguesa = d.getElementById('IconoHamburguesa'),
+                $IconoCruz = d.getElementById('IconoCruz'),
+                $Menu = d.querySelector(".menu");
           if(e.target.matches(".IconoHamburguesa.fas.fa-bars") || 
              e.target.matches(".IconoCruz.fas.fa-times")) {
               if (cerrado) {              
@@ -23,7 +23,6 @@ export function BtnMenu(){
                 $IconoCruz.style.transition = '1s';
                 cerrado = false;
               }else{
-                console.log("hola")
                 $Menu.style.width = '0%';
                 $IconoHamburguesa.style.opacity = '1';
                 $IconoHamburguesa.style.transition = '1s';
@@ -32,7 +31,6 @@ export function BtnMenu(){
                 $Menu.style.overflow = 'hidden';
                 cerrado = true;
               }
-  
              };
       });
 

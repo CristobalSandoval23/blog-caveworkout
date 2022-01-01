@@ -9,7 +9,6 @@ export function SearchForm(){
         $input.placeholder = "Buscar...";
         $input.autocomplete = "off";
         
-        
         $searchForm.appendChild($input);
         
      if(location.hash.includes("#/search")){
@@ -25,14 +24,10 @@ export function SearchForm(){
     })
 
     d.addEventListener("submit", (e)=>{
-
-        if(!e.target.matches(".search-form")) return false;
-
         e.preventDefault();
-
+        if(!e.target.matches(".search-form")) return false;
         localStorage.setItem("wpSearch", e.target.search.value);
         location.hash = `#/search?search=${e.target.search.value}`;
-
     })
     return $searchForm;
 
