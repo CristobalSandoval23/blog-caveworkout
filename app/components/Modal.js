@@ -5,7 +5,6 @@ export function Modal(){
     const d = document,
 	 $modal = d.createElement("div");
 
-
     $modal.innerHTML = `
     <input type="checkbox" id="btn-modal">
 	 <label for="btn-modal" class="lbl-modal">${(location.hash === `#/${localStorage.getItem("wpPostId")}`)?'<i class="fas fa-edit"></i>':'<a class="fas fa-plus"></a>'}</label>
@@ -29,22 +28,18 @@ export function Modal(){
 
     `;
 
-	function validationsForm(){
+	async function validationsForm(){
 		const $btn = d.querySelector(".enviar"),
 		$message = d.querySelector(".contact-form-response");
-		console.log("hola")
-		setInterval(() => {
-			let datos = JSON.parse(localStorage.getItem("datos"));
-				
-				if (location.hash === `#/${localStorage.getItem("wpPostId")}`) {
-				
-						d.querySelectorAll("input")[2].value = datos["nombre"],
-						d.querySelectorAll("input")[3].value = datos["descripcion"];
-			 console.log(datos)
-			}
-		}, 500);
-
 	
+		if(location.hash === `#/${localStorage.getItem("wpPostId")}`){				
+			 await setTimeout(() => {
+					let datos = JSON.parse(localStorage.getItem("datos"));
+					d.querySelectorAll("input")[2].value = datos["nombre"],
+					d.querySelectorAll("input")[3].value = datos["descripcion"];
+				}, 700);
+		}
+
 	$btn.addEventListener("click", e=>{
 		e.preventDefault();
 
@@ -71,8 +66,7 @@ export function Modal(){
 					body,
 					cbSuccess:(json) =>{
 						console.log(json)
-						$message.classList.remove("none");
-						
+						$message.classList.remove("none");			
 					}
 					})
 					.finally(()=> setTimeout(() =>{      
