@@ -4,7 +4,7 @@ export function Modal(){
 	
     const d = document,
 	 $modal = d.createElement("div");
-
+	 let datos;
     $modal.innerHTML = `
     <input type="checkbox" id="btn-modal">
 	 <label for="btn-modal" class="lbl-modal">${(location.hash === `#/${localStorage.getItem("wpPostId")}`)?'<i class="fas fa-edit"></i>':'<a class="fas fa-plus"></a>'}</label>
@@ -29,12 +29,13 @@ export function Modal(){
     `;
 
 	async function validationsForm(){
+		 
 		const $btn = d.querySelector(".enviar"),
 		$message = d.querySelector(".contact-form-response");
 	
 		if(location.hash === `#/${localStorage.getItem("wpPostId")}`){				
-			 await setTimeout(() => {
-					let datos = JSON.parse(localStorage.getItem("datos"));
+			 await setTimeout(() => {	
+				datos = JSON.parse(localStorage.getItem("datos"));		
 					d.querySelectorAll("input")[2].value = datos["nombre"],
 					d.querySelectorAll("input")[3].value = datos["descripcion"];
 				}, 700);
@@ -47,7 +48,7 @@ export function Modal(){
 				  nombre = d.querySelectorAll("input")[2].value,
 				  descripcion = d.querySelectorAll("input")[3].value,
 				  token = localStorage.getItem("token");  
-			
+				  datos = JSON.parse(localStorage.getItem("datos"));
 				let url = (location.hash === `#/${localStorage.getItem("wpPostId")}`)? `${api.PRODUCTOS}/${datos["_id"]}`:api.PRODUCTOS,
 					method = (location.hash === `#/${localStorage.getItem("wpPostId")}`)?"PUT":"POST",
 					headers = {

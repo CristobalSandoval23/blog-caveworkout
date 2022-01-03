@@ -14,7 +14,7 @@ export async function Router(){
         let {hash} = location;
         d.documentElement.scrollTop = 0;
         $main.innerHTML = null;
-        api_cw.limite = 10;
+        api_cw.limite = 20;
         api_cw.desde = 0;
         localStorage.setItem("Pagina", false)
        
@@ -32,8 +32,8 @@ export async function Router(){
                         localStorage.setItem("totalPost", posts["total"])
                         localStorage.setItem("Pagina", true)
                         localStorage.setItem("totalElement", $main.childElementCount)
-                        api_cw.limite += 10;
-                        api_cw.desde += 10;
+                        api_cw.limite += 20;
+                        api_cw.desde += 20;
                 }
             })
 
@@ -88,7 +88,7 @@ export async function Router(){
                     localStorage.setItem("datos",JSON.stringify(post))
                     $main.innerHTML = Post(post);                   
                     location.hash = `#/${localStorage.getItem("wpPostId")}`
-                    api_cw.limite = 10, api_cw.desde = 0;
+                    api_cw.limite = 20, api_cw.desde = 0;
                     localStorage.setItem("totalElement", 0)
                     localStorage.setItem("totalPost", 0)
                 }

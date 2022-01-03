@@ -66,8 +66,8 @@ export  function InfiniteScroll(){
                                 || location.hash.includes(`${localStorage.getItem("wpPostId")}`))  return false;                                                        
                                await $main.insertAdjacentHTML("beforeend", html);
                                d.querySelector("html").style.overflow = "scroll";
-                               api_cw.limite += 10;
-                               api_cw.desde += 10;
+                               api_cw.limite += 20;
+                               api_cw.desde += 20;
                           }           
                        }
                       }); 
