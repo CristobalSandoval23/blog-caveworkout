@@ -256,9 +256,18 @@ img{
 	display: none;
 }
 .lbl-modal{
-  background-color: #00b0ff;
-	padding: 10px 15px;
-	border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 90vh;
+  right: 80vw;
+  background-color: #000;
+  color: #00b0ff;
+  height: 50px;
+  width: 50px;
+  border-radius: 50px;
+  font-size: 27px;
 	cursor: pointer;
 }
 @media only screen and (min-width:320px) and (max-width:768px){

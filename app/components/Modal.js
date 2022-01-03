@@ -5,9 +5,10 @@ export function Modal(){
     const d = document,
 	 $modal = d.createElement("div");
 
+
     $modal.innerHTML = `
     <input type="checkbox" id="btn-modal">
-	<label for="btn-modal" class="lbl-modal">Abrir Modal</label>
+	 <label for="btn-modal" class="lbl-modal">${(location.hash === `#/${localStorage.getItem("wpPostId")}`)?'<i class="fas fa-edit"></i>':'<a class="fas fa-plus"></a>'}</label>
 	<div class="modal">
 		<div class="contenedor">
 			<header>Agregar Post!</header>
@@ -29,26 +30,31 @@ export function Modal(){
     `;
 
 	function validationsForm(){
-		
 		const $btn = d.querySelector(".enviar"),
-			  $message = d.querySelector(".contact-form-response");
-		let datos = JSON.parse(localStorage.getItem("datos")) 
-		if (!location.hash.includes("/usuario")){
-			
-			d.querySelectorAll("input")[2].value = datos["nombre"],
-			d.querySelectorAll("input")[3].value = datos["descripcion"];
+		$message = d.querySelector(".contact-form-response");
+		console.log("hola")
+		setInterval(() => {
+			let datos = JSON.parse(localStorage.getItem("datos"));
+				
+				if (location.hash === `#/${localStorage.getItem("wpPostId")}`) {
+				
+						d.querySelectorAll("input")[2].value = datos["nombre"],
+						d.querySelectorAll("input")[3].value = datos["descripcion"];
+			 console.log(datos)
+			}
+		}, 500);
 
-		}
-		$btn.addEventListener("click", e=>{
-			e.preventDefault();
+	
+	$btn.addEventListener("click", e=>{
+		e.preventDefault();
 
 			const categoria = "6139259d0e4c19c8e97cea71",
 				  nombre = d.querySelectorAll("input")[2].value,
 				  descripcion = d.querySelectorAll("input")[3].value,
 				  token = localStorage.getItem("token");  
 			
-				let url = (location.hash.includes("/usuario"))? api.PRODUCTOS:`${api.PRODUCTOS}/${datos["_id"]}`,
-					method = (location.hash.includes("/usuario"))?"POST":"PUT",
+				let url = (location.hash === `#/${localStorage.getItem("wpPostId")}`)? `${api.PRODUCTOS}/${datos["_id"]}`:api.PRODUCTOS,
+					method = (location.hash === `#/${localStorage.getItem("wpPostId")}`)?"PUT":"POST",
 					headers = {
 						'Content-Type': 'application/json',
 						'x-token': `${token}`
@@ -58,7 +64,7 @@ export function Modal(){
 						nombre,
 						descripcion
 					  });
-					  console.log("estoy")
+
 				ajax({url,
 					method,
 					headers,
@@ -75,7 +81,6 @@ export function Modal(){
             
 		})
 
-				
 	}
 
 	setTimeout(()=>validationsForm(), 100)

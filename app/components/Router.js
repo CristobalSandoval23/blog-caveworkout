@@ -6,7 +6,6 @@ import { ContactForm } from "./ContactForm.js";
 import { Login } from "./LoginForm.js";
 import { PostCard } from "./PostCard.js";
 import { Dashboard } from "./Dashboard.js";
-import { Modal } from "./Modal.js";
 
 export async function Router(){
     const d = document,
@@ -85,9 +84,9 @@ export async function Router(){
             await ajax({
                 url: `${api_cw.PRODUCTOS}/${localStorage.getItem("wpPostId")}`,
                 cbSuccess:(post)=>{
+
                     localStorage.setItem("datos",JSON.stringify(post))
-                    $main.innerHTML = Post(post);
-                    (localStorage.getItem("token") === null)? false: $main.appendChild(Modal());
+                    $main.innerHTML = Post(post);                   
                     location.hash = `#/${localStorage.getItem("wpPostId")}`
                     api_cw.limite = 10, api_cw.desde = 0;
                     localStorage.setItem("totalElement", 0)
@@ -95,7 +94,6 @@ export async function Router(){
                 }
             })
         }
-
         d.querySelector(".loader").style.display = "none";
    
 }
