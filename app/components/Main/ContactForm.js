@@ -1,4 +1,4 @@
-import { ajax } from "../helpers/ajax.js";
+import { ajax } from "../../helpers/ajax.js";
 
 export function ContactForm(){
     const d = document,
@@ -73,7 +73,6 @@ export function ContactForm(){
                             method,
                             body,
                             cbSuccess:(json) =>{
-                                console.log(json);
                                 $loader.classList.add("none");
                                 $response.classList.remove("none");
                                 $response.innerHTML = `<p>${json.message}</p>`

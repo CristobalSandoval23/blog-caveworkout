@@ -1,5 +1,5 @@
-import { ajax } from "../helpers/ajax.js";
-import api from"../helpers/cw_api.js";
+import { ajax } from "../../helpers/ajax.js";
+import api from"../../helpers/cw_api.js";
 export function Modal(){
 	
     const d = document,
@@ -66,7 +66,6 @@ export function Modal(){
 					headers,
 					body,
 					cbSuccess:(json) =>{
-						console.log(json)
 						$message.classList.remove("none");			
 					}
 					})

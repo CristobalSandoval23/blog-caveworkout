@@ -1,4 +1,4 @@
-import api from '../helpers/cw_api.js';
+import api from '../../helpers/cw_api.js';
 
 export function Mapa(){
 

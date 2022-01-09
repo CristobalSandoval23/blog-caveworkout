@@ -1,5 +1,5 @@
-import { ajax } from "../helpers/ajax.js";
-import { parseJwt } from "../helpers/parseJwt.js";
+import { ajax } from "../../helpers/ajax.js";
+import { parseJwt } from "../../helpers/parseJwt.js";
 
 export function Login(){
     const d = document,
@@ -78,7 +78,6 @@ export function Login(){
                             method,
                             body,
                             cbSuccess:(json) =>{
-                                console.log(json, "hola");
                                 $loader.classList.add("none");
                                 $response.classList.remove("none");
                                 $response.innerHTML = `<p>${json.message}</p>`

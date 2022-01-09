@@ -1,7 +1,7 @@
 import api_cw from "./cw_api.js";
 import {ajax} from "./ajax.js";
-import {SearchCard} from "../components/SearchCard.js";
-import {PostCard} from "../components/PostCard.js";
+import {SearchCard} from "../components/Header/SearchCard.js";
+import {PostCard} from "../components/Main/PostCard.js";
 import { NavegatorUserAndDevice } from "./navegator_and_davice__user.js";
 
 export  function InfiniteScroll(){

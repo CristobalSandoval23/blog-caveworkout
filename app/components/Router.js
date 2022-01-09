@@ -1,11 +1,10 @@
 import api_cw from "../helpers/cw_api.js";
 import { ajax } from "../helpers/ajax.js";
-import { Post } from "./Post.js";
-import { SearchCard } from "./SearchCard.js";
-import { ContactForm } from "./ContactForm.js";
-import { Login } from "./LoginForm.js";
-import { PostCard } from "./PostCard.js";
-import { Dashboard } from "./Dashboard.js";
+import { Post } from "./Main/Post.js";
+import { SearchCard } from "./Header/SearchCard.js";
+import { ContactForm } from "./Main/ContactForm.js";
+import { Login } from "./Main/LoginForm.js";
+import { PostCard } from "./Main/PostCard.js";
 
 export async function Router(){
     const d = document,
@@ -78,7 +77,11 @@ export async function Router(){
             }
             $main.appendChild(Login());
         } else if(hash.includes("#/usuario")){
-            $main.appendChild(Dashboard());
+            $main.innerHTML = `
+                <div>
+                    <h1>Inicio sesión</h1>
+                </div>
+            `;
         }else{
             $main.innerHTML = `<h2>Aqui cargará el contenido de el post previamente seleccionado </h2>`;
             await ajax({
