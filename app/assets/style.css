@@ -92,18 +92,11 @@ img{
     background-color: #01579b;
 }
 
-.search-form{
-    margin: auto;
-    text-align: center;
-}
-
 .search-form input {
     display: block;
-    margin: auto;
     padding: 0.25rem;
     border-radius: 0.25rem;
     font-size: 1rem;
-
 }
 
 .grid-fluid{
@@ -280,7 +273,7 @@ img{
   position: fixed; 
   z-index: 2;
   right: 0;
-  top: 9vh;
+  top: 8vh;
   width: 0%;
   height: 100%;
   transition: 0.3s;
@@ -313,9 +306,19 @@ img{
 .IconoCruz.fas.fa-times{
   opacity: 0;
 }
+
+@media (min-width: 300px) and ( max-width: 800px) {
+  .search-form{
+    position: absolute;
+    margin-top: 12vh;
+  }
+  .menu{
+    top: 12vh;
+  }
+}
+
 .search-form{
-  position: absolute;
-  margin-top: 16vh;
+  margin-left: 5vw;
 }
 
 /* LOGIN FORM*/

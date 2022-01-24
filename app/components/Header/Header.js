@@ -9,8 +9,8 @@ export function Header(){
     $header.classList.add("header");
     $header.appendChild(Menu());
     $header.appendChild(BtnMenu());
-    $header.appendChild(Title());
     $header.appendChild(SearchForm());
+    $header.appendChild(Title());
 
     return $header;
 }
