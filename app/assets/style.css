@@ -495,18 +495,18 @@ img{
 
 /* FOOTER */
 
-footer {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-content: space-between;
-}
-
 footer > section > article{
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+}
+
+
+footer{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  z-index: -1;
 }
 
 /* SOCIAL-NETWORK */
